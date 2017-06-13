@@ -27,11 +27,18 @@ class ProductsController < ApplicationController
   end
 
   def update
-
+    @product = Product.find(params[:id])
+    if @product.update(product_params)
+      redirect_to @product
+    else
+      redirect_back_or_to @product
+    end
   end
 
   def destroy
-
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to products_path
   end
 
   def product_params
