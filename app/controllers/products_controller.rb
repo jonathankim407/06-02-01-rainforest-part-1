@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
     if @product.save
       redirect_to products_path
     else
-      redirect_to new_product_path
+      render new_product_path
     end
   end
 
