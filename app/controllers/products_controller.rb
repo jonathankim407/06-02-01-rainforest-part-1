@@ -19,6 +19,7 @@ class ProductsController < ApplicationController
       redirect_to products_path
     else
       render new_product_path
+      # render :new
     end
   end
 
@@ -31,7 +32,9 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       redirect_to @product
     else
-      redirect_back_or_to @product
+      # redirect_back_or_to @product
+      # render edit_product_path(@product)
+      render :edit
     end
   end
 
