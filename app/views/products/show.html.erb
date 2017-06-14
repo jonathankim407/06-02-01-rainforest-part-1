@@ -2,41 +2,21 @@
 <h3>Description: <%= @product.description %></h3>
 <h3>Price: <%= @product.price_in_dollars %></h3>
 
-<h4>New Review</h4>
+<%= link_to 'Edit Product', edit_product_path(@product) %>
+| <%= link_to 'Delete Product', product_path(@product), method: :delete, data: {confirm: "Are you sure you want to delete the product '#{@product.name}'? This cannot be undone!"} %>
 
-<%= form_for([@product, @review]) do |f| %>
-  <% if @review.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@review.errors.count, "error") %> prohibited this review from being saved:</h2>
 
-      <ul>
-      <% @review.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+<h4>ADD New Review</h4>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_area :name %><br />
-    <%= f.label :comment %><br />
-    <%= f.text_area :comment %><br />
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+<%= render 'reviews/form', review: @review %>
+
 
 <h2>Reviews:</h2>
 <ol>
   <% @product.reviews.each do |review| %>
     <li>
       <p> On <%= review.created_at %> <%= review.name %> said: </p>
-      <p> <%= review.comment %> </p>
+      <p> <%= review.comment %> </p><p><%= link_to 'Edit Review', edit_product_review_path(@product, review) %></p>
     </li>
   <% end %>
 </ol>
-
-<%= link_to 'Edit', edit_product_path(@product) %>
-| <%= link_to 'Delete', product_path(@product), method: :delete, data: {confirm: "Are you sure you want to delete the product '#{@product.name}'? This cannot be undone!"} %>
