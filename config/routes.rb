@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   #get 'products' => 'products#index'
   #get 'products/:id' => 'products#show', as: 'product'
 
-  resources :products
+  resources :products do
+    resources :reviews, except: [:index, :new, :show]
+  end
 
 end
