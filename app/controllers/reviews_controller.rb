@@ -26,7 +26,6 @@ class ReviewsController < ApplicationController
   def edit
     @review = Review.find(params[:id]) # just added
     @product = Product.find(params[:product_id])
-
   end
 
   def update
@@ -34,13 +33,12 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     if @review.update(review_params)
       flash[:notice] = "Your review has been successfully updated!"
-      redirect_to product_path
+      redirect_to product_path(@product)
     else
       # redirect_back_or_to @product
       # render edit_product_path(@product)
       render :edit
     end
-
   end
 
   def destroy
